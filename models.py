@@ -6,7 +6,7 @@ def add_user(email, name, password_hash):
 	""" Adds user to the database
 	returns True is operations was successful else logs the exception and returns false.
 	"""
-	received_email = load_user(email)
+	received_email,_,_,_ = load_user(email)
 	if received_email is not None: # User with same email already present
 		flash('User already present. Please Login')
 		return 0
