@@ -55,6 +55,7 @@ def load_user(email):
 		for(email, name, password_hash, last_login) in cursor:
 			update_last_login(email)
 			return email, name, password_hash, last_login
+		return None, None, None, None
 	except Exception as e:
 		print(e)
 		return None, None, None, None

@@ -8,7 +8,6 @@ from pathlib import Path
 import os
 
 app = Flask(__name__)
-app.secret_key = os.getenv("SECRET_KEY")
 
 @app.route('/')
 def index():
@@ -20,7 +19,7 @@ def login_handler():
 	if form.validate_on_submit():
 		email = form.email.data
 		password = form.password.data
-		user_email, user_name, user_pwd_hash,  last_login = models.load_user(email) # Get user data from database
+		user_email, user_name, user_pwd_hash, last_login = models.load_user(email) # Get user data from database
 		if user_email is None: # User not found
 			flash('User not present please register')
 			return redirect(url_for('signup_handler'))
@@ -75,4 +74,5 @@ def logout_handler():
 if __name__ == '__main__':
 	env_path = Path('.') / '.env'
 	load_dotenv(dotenv_path=env_path, verbose=True) # Load environment variables
+	app.secret_key = os.getenv("SECRET_KEY")
 	app.run(host='127.0.0.1', port=5000, debug=True)
