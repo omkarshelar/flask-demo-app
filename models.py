@@ -53,7 +53,6 @@ def load_user(email):
 		params = (email,)
 		cursor.execute('SELECT * FROM users WHERE email=%s', params)
 		for(email, name, password_hash, last_login) in cursor:
-			update_last_login(email)
 			return email, name, password_hash, last_login
 		return None, None, None, None
 	except Exception as e:

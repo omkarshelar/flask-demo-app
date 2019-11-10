@@ -29,6 +29,7 @@ def login_handler():
 		else:
 			session['email'] = user_email # put email and name in session object
 			session['name'] = user_name
+			models.update_last_login(email)
 			if last_login is not None:
 				date = last_login.strftime("%A, %d %B, %Y") # Convert datetime to readable format
 				time = last_login.strftime("%I:%M %p")
