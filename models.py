@@ -35,7 +35,7 @@ def load_user(email):
 		cnx = mysql.connector.connect(user='test_user', password=db_password, database='demo_python')
 		cursor = cnx.cursor()
 		params = (email,)
-		cursor.execute('SELECT * FROM users WHERE email=%s', params)
+		cursor.execute('SELECT email,name,password_hash FROM users WHERE email=%s', params)
 		for(email, name, password_hash) in cursor:
 			return email, name, password_hash
 		return None, None, None
