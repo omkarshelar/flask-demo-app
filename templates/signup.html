@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-group p-5 m-5 border rounded border-primary ml-auto mr-auto" style="width: 70%;">
+  <h1 class="mb-3">Register</h1>
+  <form method="POST">
+      {{ form.hidden_tag() }}
+      {{ form.name.label }} {{ form.name(class_="form-control") }}<br>
+      {{ form.email.label }} {{ form.email(class_="form-control") }}<br>
+      {{ form.password.label }} {{ form.password(class_="form-control") }}<br>
+      {{ form.password_conf.label }} {{ form.password_conf(class_="form-control") }}<br>
+      {{ form.submit(class_="btn btn-primary") }}
+  </form>
+</div>
+<script>
+  function checkPasswords() {
+    password = document.getElementById("password").value;
+    conf_password = document.getElementById("password_conf").value;
+    btn_ref = document.getElementById("submit");
+    if(password === conf_password) {
+      btn_ref.disabled = false;
+    }
+    else {
+      btn_ref.disabled = true;
+    }
+  } 
+  document.getElementById("password_conf").addEventListener("keyup", checkPasswords);
+  document.getElementById("password").addEventListener("keyup", checkPasswords);
+</script>
+{% endblock %}
