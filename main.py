@@ -19,7 +19,7 @@ def login_handler():
 	if form.validate_on_submit():
 		email = form.email.data
 		password = form.password.data
-		user_email, user_name, user_pwd_hash, last_login = models.load_user(email) # Get user data from database
+		user_email, user_name, user_pwd_hash = models.load_user(email) # Get user data from database
 		if user_email is None: # User not found
 			flash('User not present please register')
 			return redirect(url_for('signup_handler'))
@@ -29,11 +29,6 @@ def login_handler():
 		else:
 			session['email'] = user_email # put email and name in session object
 			session['name'] = user_name
-			models.update_last_login(email)
-			if last_login is not None:
-				date = last_login.strftime("%A, %d %B, %Y") # Convert datetime to readable format
-				time = last_login.strftime("%I:%M %p")
-				flash("Hi "+user_name+". Your last login was on "+ date + " at "+time)
 		return redirect(url_for('home'))
 		
 	return render_template('login.html',form=form)
